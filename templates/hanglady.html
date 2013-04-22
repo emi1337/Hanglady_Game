@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>The Hang-Woman Game</title>
+  <link rel="stylesheet" href="../static/css/bootstrap.css" type="text/css">
+  <link rel="stylesheet" href="../static/css/hangmanstyle.css" type="text/css">
+</head>
+
+<body>
+
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="brand" href="#">Hang-Lady</a>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <li><a id="new-game-but" onclick="startFresh()">New Game</a></li>
+            <li><a id="rules-but" onclick="popRules()">Rules</a></li>
+             <!--  <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li class="nav-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+              </li> -->
+            </ul>
+           <!--  <form class="navbar-form pull-right">
+              <input class="span2" type="text" placeholder="Email">
+              <input class="span2" type="password" placeholder="Password">
+              <button type="submit" class="btn">Sign in</button>
+            </form> -->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>    
+
+
+
+    <div class="container">
+
+      <h1>Welcome to Hang-Lady!</h1>
+      <div id = "inside">
+
+
+
+        <div id="row1">
+          <div id="gallows">
+            <img src="../static/img/hangman.gif">
+          </div>
+          <div id="status">
+            <div id="til-death">
+              <h3>You have <span id="tries-until-death">6</span> tries left until the lady dies.</h3>
+            </div> <!-- end til-death -->
+            <div id="guessbox">
+              <ul>
+                <li id="a">A</li>
+                <li id="b">B</li>
+                <li id="c">C</li>
+                <li id="d">D</li>
+                <li id="e">E</li>
+                <li id="f">F</li>
+                <li id="g">G</li>
+                <li id="h">H</li>
+                <li id="i">I</li>
+                <li id="j">J</li>
+                <li id="k">K</li>
+                <li id="l">L</li>
+                <li id="m">M</li>
+                <li id="n">N</li>
+                <li id="o">O</li>
+                <li id="p">P</li>
+                <li id="q">Q</li>
+                <li id="r">R</li>
+                <li id="s">S</li>
+                <li id="t">T</li>
+                <li id="u">U</li>
+                <li id="v">V</li>
+                <li id="w">W</li>
+                <li id="x">X</li>
+                <li id="y">Y</li>
+                <li id="z">Z</li>
+              </ul>
+              <div style="clear:both"></div>
+            </div> <!-- end guessbox -->
+
+          </div> <!-- end status -->
+        </div> <!-- end row1 -->
+
+
+        <div id="row2">
+          <div id="notes">
+           Are you ready for that responsiblity?
+         </div> <!-- end notes -->
+         <div id="prog-display">
+          <ul>
+            <li>H</li>
+            <li>A</li>
+            <li>N</li>
+            <li>G</li>
+            <li>L</li>
+            <li>A</li>
+            <li>D</li>
+            <li>Y</li>
+          </ul>
+        </div> <!-- end prog-display -->
+        <div id="input-box">
+          <form id="word-form">
+            Type word here:
+            <input id="word" name="word" type="text">
+            <!-- <button id="submit-button" name="submit-button" onclick="friendGame()">Submit</button> -->
+            <input type="submit" id="word-submit-button" name="word-submit-button" value="Submit">
+          </form>
+
+          <form id="guess-form">
+            Type guess here:
+            <input id="letter" name="letter" type="text">
+            <!-- <button id="guess-submit-button" name="guess-submit-button" onclick="friendGame()">Submit</button> -->
+            <input type="submit" id="guess-submit-button" name="guess-submit-button" value="Submit">
+          </form>
+
+        </div> <!-- end input-box -->
+      </div> <!-- end row2 -->
+
+
+      <div id="row3" class="row">
+        <div class="span9">
+          <div id="start-up">  
+            <div id = "instructions">
+              <p>First, decide if you want to play a word your friend picked or just guess a computer randomized game by clicking the appropriate button below.</p>
+              <h2>RULES:</h2>
+              <p>
+                <ol>
+                  <li>You have 6 allowed wrong guesses before you die and lose the game.</li>
+                  <li>If you guess the same letter multiple times, it won't affect your "wrong guesses".</li>
+                  <li>If playing with a friend, look away while they choose your word for you.</li>
+                </ol>
+              </p>
+            </div> <!-- end instrux -->
+        <!-- 
+            <div class = "images">
+            </div> -->
+            
+
+            <span id = "start-options">
+              <button onclick="friendPrompt()">Force Friend to Pick</button>
+              <button onclick="randGame()">Computer Randomized</button>
+            </div> <!--end start-options-->
+          </span>
+        </div> <!--end start-up-->
+      </div> <!-- end span 9 start up shit -->
+    </div>
+  </div> <!--end container-->
+
+
+  
+  <script type="text/javascript" src="../static/js/jquery-2.0.0.min.js">
+  </script>
+  <script type="text/javascript" src="../static/js/wordGuesser.js">
+  </script>
+</body>
+</html>
