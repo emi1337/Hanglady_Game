@@ -1,11 +1,13 @@
 /* The "Classy Lady Hang Now Word Guess" Game -- name by Adi Kamdar */
 
+/* fixes: I'm sorry, 'undefined' wasn't in the word. --> if you do same guess twice it successfully doesn't throw it into the count but then it thinks it ISN'T correct, so it marks you off a life. */
+
 var letters = [];
 var progress = [];
 var guessed = [];
 var deathCount;
 var triesLeft;
-var imgArray = ["file:///C:/Users/Emily%20Gasca/src/_HangLady/static/img/hangman.gif ", "file:///C:/Users/Emily%20Gasca/src/_HangLady/static/img/hangman1.png", "file:///C:/Users/Emily%20Gasca/src/_HangLady/static/img/hangman2.png", "file:///C:/Users/Emily%20Gasca/src/_HangLady/static/img/hangman3.png", "file:///C:/Users/Emily%20Gasca/src/_HangLady/static/img/hangman4.png", "file:///C:/Users/Emily%20Gasca/src/_HangLady/static/img/hangman5.png", "file:///C:/Users/Emily%20Gasca/src/_HangLady/static/img/hangman6.png"];
+var imgArray = [];
 var listWords = [];
  
 // Do I need to wrap this in:
@@ -13,9 +15,26 @@ jQuery(document).ready(function(){
 	startFresh();
 })
 
-
-
-// set the placement for the image
+function startFresh(){
+	letters = [];
+	progress = [];
+	guessed = [];
+	deathCount = 0;
+	triesLeft = 6;
+	imgArray = [
+	"../static/img/lady0.png", 
+	"../static/img/lady1.png", 
+	"../static/img/lady2.png", 
+	"../static/img/lady3.png", 
+	"../static/img/lady4.png", 
+	"../static/img/lady5.png"];
+	listWords = ['the', 'your', 'daily', 'ritual', 'coffee'];
+    $('#word-form').hide();
+    $('#guess-form').hide();
+	$("#play-again-butt").hide();
+	$('#num-tries-butt').show();
+	$('#start-options').hide();
+}
 
 // event listeners
 $("#word-submit-button").on('click', function(e){
@@ -32,33 +51,62 @@ $("#guess-submit-button").on('click', function(e){
 	makeGuess(letter);
 })
 
+$("#five-chances-butt").on('click', function(e){
+	e.preventDefault();
+	imgArray = [
+	"../static/img/lady0.png", 
+	"../static/img/lady1.png", 
+	"../static/img/lady2.png", 
+	"../static/img/lady3.png", 
+	"../static/img/lady4.png", 
+	"../static/img/lady5.png", 
+	"../static/img/lady.png"]
+	triesLeft = 5;
+	modifyDiv("tries-until-death", triesLeft);
+	console.log("FIVE CHANCES");
+	$('#num-tries-butt').hide();
+	$('#start-options').show();
+})
 
-    $('#word-form').show();
+$("#six-chances-butt").on('click', function(e){
+	e.preventDefault();
+	imgArray = [
+	"../static/img/lady0.png", 
+	"../static/img/lady1.png", 
+	"../static/img/lady2.png", 
+	"../static/img/lady3.png", 
+	"../static/img/lady4.png", 
+	"../static/img/lady5.png", 
+	"../static/img/lady6.png", 
+	"../static/img/lady.png"];
+	triesLeft = 6;
+	modifyDiv("tries-until-death", triesLeft);
+	console.log("SIX CHANCES");
+	$('#num-tries-butt').hide();
+	$('#start-options').show();
+})
+
+$("#seven-chances-butt").on('click', function(e){
+	e.preventDefault();
+	imgArray = [
+	"../static/img/lady0.png", 
+	"../static/img/lady1.png", 
+	"../static/img/lady2.png", 
+	"../static/img/lady3.png", 
+	"../static/img/lady3b.png", 
+	"../static/img/lady4.png", 
+	"../static/img/lady5.png", 
+	"../static/img/lady6.png", 
+	"../static/img/lady.png"];
+	triesLeft = 7;
+	modifyDiv("tries-until-death", triesLeft);
+	console.log("SEVEN CHANCES");
+	$('#num-tries-butt').hide();
+	$('#start-options').show();
+})
 
 
 // game functions
-
-// game start
-function startFresh(){
-	letters = [];
-	progress = [];
-	guessed = [];
-	deathCount = 0;
-	triesLeft = 6;
-	imgArray = [
-	"file:///C:/Users/Emily%20Gasca/src/_HangLady/static/img/hangman.gif ", 
-	"file:///C:/Users/Emily%20Gasca/src/_HangLady/static/img/hangman1.png",
-	 "file:///C:/Users/Emily%20Gasca/src/_HangLady/static/img/hangman2.png", 
-	 "file:///C:/Users/Emily%20Gasca/src/_HangLady/static/img/hangman3.png", 
-	 "file:///C:/Users/Emily%20Gasca/src/_HangLady/static/img/hangman4.png", 
-	 "file:///C:/Users/Emily%20Gasca/src/_HangLady/static/img/hangman5.png", 
-	 "file:///C:/Users/Emily%20Gasca/src/_HangLady/static/img/hangman6.png"];
-	listWords = ['the', 'your', 'daily', 'ritual', 'coffee'];
-    $('#word-form').hide();
-    $('#guess-form').hide();
-	$("#play-again-butt").hide();
-	// window.opener.location.reload();
-}
 
 // modifications
 function modifyDiv(divName, newText, add) {
@@ -75,6 +123,36 @@ function modifyImg(imgIdx) {
 	var ladyImage = document.getElementsByTagName('img')[0];
 	ladyImage.src = imgArray[imgIdx];
 	console.log(ladyImage.src);
+}
+
+function modifyStory() {
+	if (imgArray[deathCount] == "../static/img/lady1.png") {
+		modifyDiv("story", "Ahhh, the lady's head has been transported to the gallows! But she's not...not dead yet. I promise.")
+	}
+	else if (imgArray[deathCount] == "../static/img/lady2.png") {
+		modifyDiv("story", "Oh no, now her torso is there! Stop screwing up your word. WHY DON'T YOU PSYCHICALLY KNOW THE ANSWERS?!")
+	}
+	else if (imgArray[deathCount] == "../static/img/lady3.png") {
+		modifyDiv("story", "Aaaand there goes her left arm. But you still have a chance to save her, because it's magic that doesn't kill her until her whole body is uhhhh transported to the--okay, YOU try to explain the logic of this game without sounding insane...")
+	}
+	else if (imgArray[deathCount] == "../static/img/lady3b.png") {
+		modifyDiv("story", "And her right!")
+	}
+	else if ((imgArray[deathCount] == "../static/img/lady4.png") && imgArray[deathCount-1] != "../static/img/lady3b.png") {
+		modifyDiv("story", "And her right!")
+	}
+	else if ((imgArray[deathCount] == "../static/img/lady4.png") && imgArray[deathCount-1] == "../static/img/lady3b.png") {
+		modifyDiv("story", "Oh, now she has her umbrella and/or walking stick with her. So NATURALLY that means she's closer to death--<b>it's why Mary Poppins would sporadically look grim.</b>")
+	}
+	else if ((imgArray[deathCount] == "../static/img/lady5.png") && (triesLeft > 0))  {
+		modifyDiv("story", "I know in hangman, the legs get added one at a time, but she's a LADY who happens to be in a DRESS. Have some respect, my goodness.<br/><br/>Also she's not dead yet because she doesn't have her purse/lunchbox yet. Shut up.")
+	}
+	else if ((imgArray[deathCount] == "../static/img/lady5.png") && (triesLeft < 1))  {
+		modifyDiv("story", "I know in hangman, the legs get added one at a time, but she's a LADY who happens to be in a DRESS. Have some respect, my goodness. <br/><br/>Also, you failed.")
+	}
+	else if ((imgArray[deathCount] == "../static/img/lady6.png") && (triesLeft < 1)) {
+		modifyDiv("story", "<br/><br/> Oh, you failed.")
+	}
 }
 
 //game logics
@@ -137,18 +215,20 @@ function makeString(array) {
 }
 
 function checkStatus() {
+	modifyStory();
 	console.log("checking", progress)
 	//if you dead
-	if (deathCount > 5) {
+	if (triesLeft < 1) {
 		$("#guess-form").hide();
 		modifyDiv("tries-until-death", "0");
-		modifyDiv("notes", "Oy, that's 6 wrong guesses and ya died. D: Press 'New Game' to play again!", 0);
+		modifyDiv("notes", "Oy, that's 6 wrong guesses and ya died her. D: Press 'New Game' to play again!", 0);
 	}
 	
 	//if all are guessed, DONE WOO
 	if (allGuessed() == true) {
 		$("#guess-form").hide();
-		modifyDiv("notes", "You guessed all the letters! Your word was: " + makeString(letters) + " Press 'New Game' to play again.", 0);
+		modifyImg(imgArray.length-1);
+		modifyDiv("notes", "You guessed all the letters! Your word was: " + makeString(letters) + ".<br/> Press 'New Game' to play again.", 0);
 	}
 }
 
@@ -222,7 +302,12 @@ function guessLetter(letter) {
 	else {
 		triesLeft--;
 		deathCount++;
-		modifyDiv("notes", "I'm sorry, '" + letter + "' wasn't in the word. You have " + triesLeft + " tries left.", 0);
+		if (triesLeft == 1)	{
+			modifyDiv("notes", "I'm sorry, '" + letter + "' wasn't in the word. You have " + triesLeft + " try left.", 0);
+		}
+		else {
+			modifyDiv("notes", "I'm sorry, '" + letter + "' wasn't in the word. You have " + triesLeft + " tries left.", 0);
+		}
 		modifyDiv("tries-until-death", triesLeft);
 		modifyImg(deathCount);
 		modifyLetter(letter, 0);
@@ -273,7 +358,8 @@ function randGame() {
 
 function playGame(word) {
 	var firstGo = true;
-	modifyDiv("start-up", "")
+	modifyDiv("start-up", "");
+	modifyImg(0);
 	changeProgress(word, word.length, firstGo);
 	makeWordArray(word);
 	modifyDiv("notes", "<br/><br/>We've got the magic word.", 0)
@@ -286,44 +372,3 @@ function gallows() {
 function popRules() {
 	
 }
-
-// function Card(img, bunch, id, reverse) {
-//   var self = this;
-  
-//   this.img     = img;
-//   this.bunch   = bunch;
-//   this.id      = id;
-//   this.reverse = reverse;
-
-//   this.suit    = Math.floor(id / self.bunch.board.deck.cardSuit);
-//   this.number  = Math.floor(id % self.bunch.board.deck.cardSuit) + 1;
-//   this.color   = Math.floor(id / self.bunch.board.deck.cardSuit) % 2;
-
-//   this.img.card = self;
-
-// function makeCard(); 
-// 	  this.createCard = function(bunch, id) {
-// 	    var reverse = bunch.initialCardReverse();
-// 	    var img     = self.createCardImg(bunch, id, reverse);
-// 	    var card    = new Card(img, bunch, id, reverse);
-	    
-// 	    bunch.addCard(card);
-// 	    self.div.appendChild(img);
-// 	  }
-
-// 	this.createCardImg = function(bunch, id, reverse) {
-// 	    var zIndex  = bunch.initialCardZIndex();
-// 	    var left    = bunch.initialCardLeft();
-// 	    var top     = bunch.initialCardTop();
-// 	    var width   = self.deck.cardWidth;
-// 	    var height  = self.deck.cardHeight;
-// 	    var src     = self.deck.cardSrc(id, reverse);
-	    
-// 	    return( createImg("card" + String(id), "card", zIndex, left, top, width, height, src) );
-// 	  }
-
-
-// event handler listens for computer randomized button
-// calls pickRandomWord();
-// use js to make event handler that listens for a "play game button" to be pressed 
-// form that shows up ONLY once or keep prompt?

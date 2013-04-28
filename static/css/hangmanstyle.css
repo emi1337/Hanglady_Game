@@ -88,6 +88,17 @@ h1 {
   background-color: #551A2E
 }
 
+#story-corner {
+  padding: 100px 50px; 
+  font-size: 23px;
+
+}
+
+#story {
+  padding: 10px; 
+  font-size: 20px;
+  font-style: italic;
+}
 
 #row2 {
   text-align: center;
@@ -95,6 +106,8 @@ h1 {
 
 #notes {
   font-size: 25px;
+  line-height: 30px;
+  /*padding: 20px;*/
 }
 
 #prog-display {
@@ -108,4 +121,8 @@ h1 {
 #prog-display li {
   padding: 20px;
   text-decoration: underline;
+}
+
+#num-tries-butt {
+  padding: 10px;
 }

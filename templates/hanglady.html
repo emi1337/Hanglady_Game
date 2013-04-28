@@ -20,7 +20,7 @@
         <a class="brand" href="#">Hang-Lady</a>
         <div class="nav-collapse collapse">
           <ul class="nav">
-            <li><a id="new-game-but" onclick="startFresh()">New Game</a></li>
+            <li><a href="/" id="new-game-but" onclick="startFresh()">New Game</a></li>
             <li><a id="rules-but" onclick="popRules()">Rules</a></li>
              <!--  <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
@@ -56,11 +56,11 @@
 
         <div id="row1">
           <div id="gallows">
-            <img src="../static/img/hangman.gif">
+            <img src="../static/img/lady6.png">
           </div>
           <div id="status">
             <div id="til-death">
-              <h3>You have <span id="tries-until-death">6</span> tries left until the lady dies.</h3>
+              <h3>You have <span id="tries-until-death">some</span> tries left until the lady dies.</h3>
             </div> <!-- end til-death -->
             <div id="guessbox">
               <ul>
@@ -93,7 +93,14 @@
               </ul>
               <div style="clear:both"></div>
             </div> <!-- end guessbox -->
+            
+            <div id="story-corner">
+              <strong>~The Story Corner~</strong>
+              <div id="story">
 
+                <p>I'll let you know how you're doing as we go.</p>
+              </div> <!-- end story -->
+            </div> <!-- end story corner -->
           </div> <!-- end status -->
         </div> <!-- end row1 -->
 
@@ -128,8 +135,9 @@
             <!-- <button id="guess-submit-button" name="guess-submit-button" onclick="friendGame()">Submit</button> -->
             <input type="submit" id="guess-submit-button" name="guess-submit-button" value="Submit">
           </form>
-
         </div> <!-- end input-box -->
+
+
       </div> <!-- end row2 -->
 
 
@@ -137,7 +145,8 @@
         <div class="span9">
           <div id="start-up">  
             <div id = "instructions">
-              <p>First, decide if you want to play a word your friend picked or just guess a computer randomized game by clicking the appropriate button below.</p>
+
+
               <h2>RULES:</h2>
               <p>
                 <ol>
@@ -146,6 +155,14 @@
                   <li>If playing with a friend, look away while they choose your word for you.</li>
                 </ol>
               </p>
+              <p><strong>First</strong>, how many tries will you allow yourself--I mean will this particular magical hang-lady process take?</p>
+              <div id="num-tries-butt">
+                <button id="five-chances-butt">I'm a boss--5 chances.</button>
+                <button id="six-chances-butt">6 chances, because reasons.</button>
+                <button id="seven-chances-butt">I hate words...7 pls?</button>
+              </div><!-- end num tries butt -->
+
+              <p><strong>Second</strong>, decide if you want to play a word your friend picked or just guess a computer randomized game by clicking the appropriate button below.</p>
             </div> <!-- end instrux -->
         <!-- 
             <div class = "images">
