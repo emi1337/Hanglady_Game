@@ -8,8 +8,8 @@ var guessed = [];
 var deathCount;
 var triesLeft;
 var imgArray = [];
-var listWords = [];
- 
+
+
 // Do I need to wrap this in:
 jQuery(document).ready(function(){
 	startFresh();
@@ -28,7 +28,6 @@ function startFresh(){
 	"../static/img/lady3.png", 
 	"../static/img/lady4.png", 
 	"../static/img/lady5.png"];
-	listWords = ['the', 'your', 'daily', 'ritual', 'coffee'];
     $('#word-form').hide();
     $('#guess-form').hide();
 	$("#play-again-butt").hide();
@@ -108,6 +107,10 @@ $("#seven-chances-butt").on('click', function(e){
 
 // game functions
 
+function toggleRules() {
+	$('#rules').toggle();
+}
+
 // modifications
 function modifyDiv(divName, newText, add) {
     var div = document.getElementById(divName);
@@ -157,12 +160,9 @@ function modifyStory() {
 
 //game logics
 function pickRandomWord() {
-	/*
-	import a dictionary? scrape something?
-	perhaps pick "subjects" of words you could guess
-	 */
-	var random = Math.floor(Math.random()*10);
+	var random = Math.floor(Math.random()*376);
 	if (random < listWords.length && random >= 0) {
+		console.log(random)
 		return listWords[random];	 	
 	} else {
 		return pickRandomWord();
@@ -216,19 +216,18 @@ function makeString(array) {
 
 function checkStatus() {
 	modifyStory();
-	console.log("checking", progress)
 	//if you dead
 	if (triesLeft < 1) {
 		$("#guess-form").hide();
 		modifyDiv("tries-until-death", "0");
-		modifyDiv("notes", "Oy, that's 6 wrong guesses and ya died her. D: Press 'New Game' to play again!", 0);
+		modifyDiv("notes", "Oy, that's 6 wrong guesses and ya died her. D: The word was " + makeString(letters) + ".<br/><br/>Press 'New Game' to play again!", 0);
 	}
 	
 	//if all are guessed, DONE WOO
 	if (allGuessed() == true) {
 		$("#guess-form").hide();
 		modifyImg(imgArray.length-1);
-		modifyDiv("notes", "You guessed all the letters! Your word was: " + makeString(letters) + ".<br/> Press 'New Game' to play again.", 0);
+		modifyDiv("notes", "You guessed all the letters! Your word was: " + makeString(letters) + ".<br/><br/> Press 'New Game' to play again.", 0);
 	}
 }
 
@@ -372,3 +371,6 @@ function gallows() {
 function popRules() {
 	
 }
+
+
+var listWords = ['attracted', 'candid', 'simplicity', 'marvelous','familiarity', 'ancient', 'armor', 'restfulness', 'company', 'together', 'modest', 'people', 'being', 'shown', 'through', 'began', 'which', 'interested', 'talked', 'along', 'softly', 'pleasantly', 'flowingly', 'seemed', 'drift', 'imperceptibly', 'world', 'remote', 'forgotten', 'country', 'gradually', 'spell', 'among', 'specters', 'shadows', 'antiquity', 'holding', 'speech', 'relic', 'exactly', 'would', 'speak', 'nearest', 'personal', 'friends', 'enemies', 'familiar', 'neighbors', 'spoke', 'bedivere', 'ganis', 'launcelot', 'galahad', 'other', 'great', 'names', 'table', 'unspeakably', 'faded', 'musty', 'presently', 'turned', 'might', 'weather', 'common', 'matter', 'transmigration', 'souls', 'transposition', 'epochs', 'bodies', 'heard', 'little', 'interested', 'answer',  'moment', 'silence', 'immediately', 'interrupted', 'droning', 'voice', 'salaried', 'century', 'round', 'belonged', 'knight', 'sagramor', 'desirous', 'observe', 'chainmail', 'breast',  'accounted', 'supposed', 'bullet', 'since', 'invention', 'firearms', 'perhaps', 'maliciously', 'soldiers."', 'acquaintance', 'smiled', 'modern', 'smile', 'general', 'centuries', 'muttered', 'apparently', 'himself', 'after', 'pause', 'added', 'myself', 'recovered', 'electric', 'surprise', 'remark', 'evening', 'steeped', 'dream', 'olden', 'while', 'windows', 'roared', 'eaves', 'corners', 'dipped', 'thomas', "malory's", 'enchanting', 'feast', 'prodigies', 'adventures', 'breathed', 'fragrance', 'obsolete', 'dreamed', 'again', 'midnight', 'length', 'another', 'nightcap', 'follows', 'reposeful', 'summer', 'landscape', 'lovely', 'dream', 'lonesome', 'sunday', 'smell', 'flowers', 'buzzing', 'insects', 'twittering', 'birds', 'there', 'people', 'wagons', 'nothing', 'going', 'mainly', 'winding', 'hoofprints', 'faint', 'trace', 'wheels', 'either', 'grass', 'wheels', 'apparently', 'broad', 'presently', 'years', 'cataract', 'golden', 'streaming', 'shoulders', 'along', 'around', 'poppies', 'sweet', 'outfit', 'walked', 'indolently', 'peace', 'reflected', 'innocent', 'circus', 'attention', 'startled', 'fantastic', 'every', 'indifferently', 'might', 'couple', 'happened', 'notice', 'change', 'hands', 'turned', 'stone', 'mouth', 'dropped', 'stared', 'timorously', 'picture', 'astonished', 'curiosity', 'touched', 'stood', 'gazing', 'stupefied', 'fascination', 'corner', 'should', 'instead', 'other', 'consider', 'spectacle', 'totally', 'overlook', 'merits', 'respect', 'another', 'puzzling', 'thing', 'display', 'magnanimity', 'surprising', 'young', 'thought', 'moved', 'approached', 'signs', 'began', 'appear', 'intervals', 'passed', 'wretched', 'cabin', 'thatched', 'small', 'fields', 'garden', 'patches', 'indifferent', 'state', 'cultivation', 'brawny', 'coarse', 'uncombed', 'their', 'faces', 'animals', 'women', 'towlinen', 'below', 'sandal', 'collar', 'girls', 'always', 'naked', 'nobody', 'seemed', 'these', 'talked', 'fetched', 'families', 'noticed', 'fellow', 'except', 'humble', 'salutation', 'response', 'pains', 'substantial', 'windowless', 'houses', 'scattered', 'among', 'wilderness', 'cabins', 'streets', 'crooked', 'alleys', 'unpaved', 'troops', 'children', 'played', 'noise', 'roamed', 'rooted', 'contentedly', 'reeking', 'wallow', 'middle', 'thoroughfare', 'suckled', 'family', 'distant', 'blare', 'military', 'music', 'noble', 'cavalcade', 'wound', 'glorious', 'plumed', 'helmets', 'flashing', 'flaunting', 'banners', 'doublets', 'horsecloths', 'gilded', 'spearheads', 'through', 'swine', 'brats', 'joyous', 'shabby', 'gallant', 'followed', 'alley',  'climbing', 'climbing',  'gained', 'breezy', 'height', 'where', 'castle', 'exchange', 'bugle', 'blasts', 'parley', 'walls', 'men-at-arms', 'hauberk', 'morion', 'marched', 'forth', 'halberd', 'shoulder', 'under', 'flapping', 'figure', 'dragon', 'displayed', 'great', 'gates', 'flung', 'drawbridge', 'lowered', 'swept', 'forward', 'frowning', 'arches', 'following', 'found', 'ourselves', 'paved', 'court', 'towers', 'turrets', 'stretching', 'sides', 'dismount', 'greeting', 'ceremony', 'running', 'intermingling', 'colors', 'altogether', 'pleasant', 'confusion'];
